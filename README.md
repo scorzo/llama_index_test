@@ -32,3 +32,40 @@ Run the script:
 python semantic_load.py
 python semantic_retrieve.py
 ````
+
+## Using the Modules
+
+To use the modules in your own projects, you can import the classes from the modules and initialize them with the necessary parameters.
+
+### LlamaIndexModule
+
+```python
+from semantic_load import LlamaIndexModule
+
+# Initialize the module with the data directory, database path, and persistence directory
+module = LlamaIndexModule(data_directory="data", db_path="./data_db", persist_dir="./data_db/persist")
+
+# Initialize the index
+index = module.initialize_index()
+
+# Use the index for retrieval and other operations
+````
+
+### LLamaIndexHandler
+
+```python
+from semantic_retrieve import LlamaIndexHandler
+
+# Initialize the handler with the database path and persistence directory
+handler = LlamaIndexHandler(db_path="./data_db", persist_dir="./data_db/persist")
+
+# Retrieve and serialize results
+results = retriever.retrieve("Your query here")
+explained_results = handler.serialize_results_explained(results)
+print(json.dumps(explained_results, indent=2))
+
+# Get next nodes from a base node
+next_nodes = handler.get_next_nodes(results[0], 3)
+print(json.dumps(next_nodes, indent=2))
+
+````
